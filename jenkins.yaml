@@ -1,0 +1,20 @@
+jenkins:
+  systemMessage: "Bienvenue sur votre instance Jenkins automatisée avec Podman et JCasC !"
+  numExecutors: 2
+  mode: NORMAL
+  
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "MonMotDePpasseSecurise123"
+          properties:
+            - myView:
+                filter: false
+            - metaData:
+                attributes: []
+
+unclassified:
+  location:
+    url: "http://localhost:8080/"

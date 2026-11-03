@@ -1,20 +1,35 @@
 jenkins:
-  systemMessage: "Bienvenue sur votre instance Jenkins automatisée avec Podman et JCasC !"
-  numExecutors: 2
+  systemMessage: "Instance Jenkins JCasC fonctionnelle sous Podman et WSL2 !"
+  numExecutors: 1
   mode: NORMAL
-  
-  securityRealm:
-    local:
-      allowsSignup: false
-      users:
-        - id: "admin"
-          password: "MonMotDePpasseSecurise123"
-          properties:
-            - myView:
-                filter: false
-            - metaData:
-                attributes: []
 
 unclassified:
   location:
-    url: "http://localhost:8080/"
+    url: "http://localhost:8085/"
+
+jobs:
+  - script: |
+      pipelineJob('Mon-Premier-Pipeline-Automatique') {
+        description('Ce pipeline a été généré automatiquement via la Configuration as Code !')
+        definition {
+          cps {
+            script('''
+              pipeline {
+                  agent any
+                  stages {
+                      stage('Construction 🏗️') {
+                          steps { echo 'Compilation et préparation...' }
+                      }
+                      stage('Tests 🧪') {
+                          steps { echo 'Exécution des tests... ✅' }
+                      }
+                      stage('Déploiement 🚀') {
+                          steps { echo 'Déploiement en cours...' }
+                      }
+                  }
+              }
+            ''')
+            sandbox(true)
+          }
+        }
+      }
